@@ -96,29 +96,102 @@ If the kernel has been tainted by overriding a firmware table or by loading a pr
   </criteria>
  </definition>
 
+<!-- DEFINITION EXEMPLE START HERER -->
+
+<definition class="patch" id="oval:org.fwupd.hsi.Spi.Bioswe:def:1" version="1">
+ <!-- class value can be found here https://oval.mitre.org/language/version5.10/ovaldefinition/documentation/oval-common-schema.html#ClassEnumeration -->
+ <metadata>
+  <title>Firmware Write Protection</title>
+  <affected family="unix">
+   <platform>Fedora</platform>
+  </affected>
+  <reference ref_id="RHBA-2022:1386" ref_url="https://access.redhat.com/errata/RHBA-2022:1386" source="RHSA"/>
+  <reference ref_id="CVE-2022-0613" ref_url="https://access.redhat.com/security/cve/CVE-2022-0613" source="CVE"/>
+  <description>Firmware Write Protection protects device firmware memory from being tampered with
+  </description>
+<!-- Here is Red hat advisory in Meta data -->
+<!-- Customized metadata can be -> "xsd:any"	and no limitation on numbers of xsd -->
+<!-- And can be removed -->
+  <advisory from="secalert@redhat.com">
+   <severity>Critical</severity>
+   <rights>Copyright 2022 Red Hat, Inc.</rights>
+   <issued date="2022-11-10"/>
+   <updated date="2022-11-10"/>
+   <cve cvss3="6.5/CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N" cwe="CWE-178-&gt;CWE-639" href="https://access.redhat.com/security/cve/CVE-2022-0613" impact="moderate" public="20220216">CVE-2022-0613</cve>
+   <bugzilla href="https://bugzilla.redhat.com/2055496" id="2055496">CVE-2022-0613 urijs: Authorization Bypass Through User-Controlled Key</bugzilla>
+   <affected_cpe_list>
+    <cpe>cpe:/a:redhat:enterprise_linux:8</cpe>
+   </affected_cpe_list>
+  </advisory>
+ <!-- end Red Hat customized -->
+ </metadata>
+ <criteria operator="OR">
+  <!-- The def have to point to a test -->
+  <criterion comment="DMA protection" test_ref="oval:org.fwupd.hsi.Spi.Bioswe:tst:1"/>
+ </criteria>
+</definition>
+
+
+<!-- DEFINITION END -->
+
+<!-- another example -->
+<definition class="patch" id="oval:org.fwupd.hsi.IntelSmap:def:1" version="1">
+ <!-- class value can be found here https://oval.mitre.org/language/version5.10/ovaldefinition/documentation/oval-common-schema.html#ClassEnumeration -->
+ <metadata>
+  <title>Intel SMAP</title>
+  <affected family="unix">
+   <platform>Fedora</platform>
+  </affected>
+  <reference ref_id="RHBA-2022:1386" ref_url="https://access.redhat.com/errata/RHBA-2022:1386" source="RHSA"/>
+  <reference ref_id="CVE-2022-0613" ref_url="https://access.redhat.com/security/cve/CVE-2022-0613" source="CVE"/>
+  <description>Intel Supervisor Mode Access Prevention ensures critical
+parts of device memory are not accessed by less secure
+programs.
+
+  </description>
+<!-- Here is Red hat advisory in Meta data -->
+<!-- Customized metadata can be -> "xsd:any"	and no limitation on numbers of xsd -->
+<!-- And can be removed -->
+ <!-- end Red Hat customized -->
+ </metadata>
+ <criteria operator="OR">
+  <!-- The def have to point to a test -->
+  <criterion comment="Intel SMAP" test_ref="oval:org.fwupd.hsi.IntelSmap:tst:1"/>
+ </criteria>
+</definition>
+
+
+<!-- another example -->
+<definition class="patch" id="oval:or.example:def:1" version="1">
+ <!-- class value can be found here https://oval.mitre.org/language/version5.10/ovaldefinition/documentation/oval-common-schema.html#ClassEnumeration -->
+ <metadata>
+  <title>Intel SMAP</title>
+  <affected family="unix">
+   <platform>Fedora</platform>
+  </affected>
+  <reference ref_id="RHBA-2022:1386" ref_url="https://access.redhat.com/errata/RHBA-2022:1386" source="RHSA"/>
+  <reference ref_id="CVE-2022-0613" ref_url="https://access.redhat.com/security/cve/CVE-2022-0613" source="CVE"/>
+  <description> use criteria
+
+  </description>
+<!-- Here is Red hat advisory in Meta data -->
+<!-- Customized metadata can be -> "xsd:any"	and no limitation on numbers of xsd -->
+<!-- And can be removed -->
+ <!-- end Red Hat customized -->
+ </metadata>
+ <criteria operator="OR">
+  <!-- One of the status is true then return true -->
+  <criterion comment="Intel SMAP" test_ref="oval:org.fwupd.hsi.IntelSmap:tst:1"/>
+  <criterion comment="DMA protection" test_ref="oval:org.fwupd.hsi.Spi.Bioswe:tst:1"/>
+  <criterion comment="Kernel taintesd" test_ref="oval:org.fwupd.hsi.Kernel.Tainted:tst:1"/>
+ </criteria>
+</definition>
+
+
+
 </definitions>
 
 <tests>
- <red-def:fwupdsecattr_test check="at least one" comment="TPM2.0" id="oval:com.freedesktop.fwupd:tst:7088995" version="636">
-  <red-def:object object_ref="oval:com.freedesktop.fwupd:obj:7088995"/>
-  <red-def:state state_ref="oval:com.freedesktop.fwupd:ste:7088995"/>
- </red-def:fwupdsecattr_test>
- <red-def:fwupdsecattr_test check="at least one" comment="Preboot DMA" id="oval:com.freedesktop.fwupd:tst:7088996" version="636">
-  <red-def:object object_ref="oval:com.freedesktop.fwupd:obj:7088996"/>
-  <red-def:state state_ref="oval:com.freedesktop.fwupd:ste:7088996"/>
- </red-def:fwupdsecattr_test>
- <red-def:fwupdsecattr_test check="at least one" comment="secure boot" id="oval:com.freedesktop.fwupd:tst:7088997" version="636">
-  <red-def:object object_ref="oval:com.freedesktop.fwupd:obj:7088997"/>
-  <red-def:state state_ref="oval:com.freedesktop.fwupd:ste:7088997"/>
- </red-def:fwupdsecattr_test>
- <red-def:fwupdsecattr_test check="at least one" comment="ACPI DMAR" id="oval:com.freedesktop.fwupd:tst:7088998" version="636">
-  <red-def:object object_ref="oval:com.freedesktop.fwupd:obj:7088998"/>
-  <red-def:state state_ref="oval:com.freedesktop.fwupd:ste:7088998"/>
- </red-def:fwupdsecattr_test>
- <red-def:fwupdsecattr_test check="at least one" comment="Intel CET" id="oval:com.freedesktop.fwupd:tst:7088999" version="636">
-  <red-def:object object_ref="oval:com.freedesktop.fwupd:obj:7088999"/>
-  <red-def:state state_ref="oval:com.freedesktop.fwupd:ste:7088999"/>
- </red-def:fwupdsecattr_test>
  <red-def:fwupdsecattr_test check="at least one" comment="AMD Rollback protection" id="oval:org.fwupd.hsi.Amd.PlatformRollbackProtection:tst:1" version="1">
   <red-def:object object_ref="oval:org.fwupd.hsi.Amd.PlatformRollbackProtection:obj:1"/>
   <red-def:state state_ref="oval:org.fwupd.hsi.Amd.PlatformRollbackProtection:ste:1"/>
@@ -131,23 +204,19 @@ If the kernel has been tainted by overriding a firmware table or by loading a pr
   <red-def:object object_ref="oval:org.fwupd.hsi.Kernel.Tainted:obj:1"/>
   <red-def:state state_ref="oval:org.fwupd.hsi.Kernel.Tainted:ste:1"/>
  </red-def:fwupdsecattr_test>
+ <!-- not-valid test example -->
+ <!-- Test contains input (object) and output description (status) -->
+ <red-def:fwupdsecattr_test check="at least one" comment="Kernel Tainted" id="oval:org.fwupd.hsi.Spi.Bioswe:tst:1" version="1">
+  <red-def:object object_ref="oval:org.fwupd.hsi.Spi.Bioswe:obj:1"/>
+  <red-def:state state_ref="oval:org.fwupd.hsi.Spi.Bioswe:ste:1"/>
+ </red-def:fwupdsecattr_test>
+ <!-- End test -->
+ <red-def:fwupdsecattr_test check="at least one" comment="Intel SMAP" id="oval:org.fwupd.hsi.IntelSmap:tst:1" version="1">
+  <red-def:object object_ref="oval:org.fwupd.hsi.IntelSmap:obj:1"/>
+  <red-def:state state_ref="oval:org.fwupd.hsi.IntelSmap:ste:1"/>
+ </red-def:fwupdsecattr_test>
 </tests>
 <objects>
- <red-def:fwupdsecattr_object id="oval:com.freedesktop.fwupd:obj:7088995" version="636">
-  <red-def:stream-id datatype="string">org.fwupd.hsi.Tpm.Version20</red-def:stream-id>
- </red-def:fwupdsecattr_object>
- <red-def:fwupdsecattr_object id="oval:com.freedesktop.fwupd:obj:7088996" version="636">
-  <red-def:stream-id datatype="string">org.fwupd.hsi.Uefi.Pk</red-def:stream-id>
- </red-def:fwupdsecattr_object>
- <red-def:fwupdsecattr_object id="oval:com.freedesktop.fwupd:obj:7088997" version="636">
-  <red-def:stream-id datatype="string">org.fwupd.hsi.Uefi.SecureBoot</red-def:stream-id>
- </red-def:fwupdsecattr_object>
- <red-def:fwupdsecattr_object id="oval:com.freedesktop.fwupd:obj:7088998" version="636">
-  <red-def:stream-id datatype="string">org.fwupd.hsi.Mei.Version</red-def:stream-id>
- </red-def:fwupdsecattr_object>
- <red-def:fwupdsecattr_object id="oval:com.freedesktop.fwupd:obj:7088999" version="636">
-  <red-def:stream-id datatype="string">org.fwupd.hsi.IntelCet</red-def:stream-id>
- </red-def:fwupdsecattr_object>
  <red-def:fwupdsecattr_object id="oval:org.fwupd.hsi.Amd.PlatformRollbackProtection:obj:1" version="1">
   <red-def:stream-id datatype="string">org.fwupd.hsi.Amd.PlatformRollbackProtection</red-def:stream-id>
  </red-def:fwupdsecattr_object>
@@ -157,23 +226,16 @@ If the kernel has been tainted by overriding a firmware table or by loading a pr
  <red-def:fwupdsecattr_object id="oval:org.fwupd.hsi.Kernel.Tainted:obj:1" version="1">
   <red-def:stream-id datatype="string">org.fwupd.hsi.Kernel.Tainted</red-def:stream-id>
  </red-def:fwupdsecattr_object>
+ <!-- Object is formed in key:value format ex: stream-id:org.fwupd.hsi.Kernel.Tainted -->
+ <red-def:fwupdsecattr_object id="oval:org.fwupd.hsi.Spi.Bioswe:obj:1" version="1">
+  <red-def:stream-id datatype="string">org.fwupd.hsi.Spi.Bioswe</red-def:stream-id>
+ </red-def:fwupdsecattr_object>
+ <!-- end object -->
+ <red-def:fwupdsecattr_object id="oval:org.fwupd.hsi.IntelSmap:obj:1" version="1">
+  <red-def:stream-id datatype="string">org.fwupd.hsi.IntelSmap</red-def:stream-id>
+ </red-def:fwupdsecattr_object>
 </objects>
 <states>
- <red-def:fwupdsecattr_state id="oval:com.freedesktop.fwupd:ste:7088995" version="636">
-  <red-def:security-attr datatype="string" operation="pattern match">not-found</red-def:security-attr>
- </red-def:fwupdsecattr_state>
- <red-def:fwupdsecattr_state id="oval:com.freedesktop.fwupd:ste:7088996" version="636">
-  <red-def:security-attr datatype="string" operation="pattern match">not-valid</red-def:security-attr>
- </red-def:fwupdsecattr_state>
- <red-def:fwupdsecattr_state id="oval:com.freedesktop.fwupd:ste:7088997" version="636">
-  <red-def:security-attr datatype="string" operation="pattern match">pass</red-def:security-attr>
- </red-def:fwupdsecattr_state>
- <red-def:fwupdsecattr_state id="oval:com.freedesktop.fwupd:ste:7088998" version="636">
-  <red-def:security-attr datatype="string" operation="pattern match">pass</red-def:security-attr>
- </red-def:fwupdsecattr_state>
- <red-def:fwupdsecattr_state id="oval:com.freedesktop.fwupd:ste:7088999" version="636">
-  <red-def:security-attr datatype="string" operation="pattern match">pass</red-def:security-attr>
- </red-def:fwupdsecattr_state>
  <red-def:fwupdsecattr_state id="oval:org.fwupd.hsi.Amd.PlatformRollbackProtection:ste:1" version="1">
   <red-def:security-attr datatype="string" operation="pattern match">not-found</red-def:security-attr>
  </red-def:fwupdsecattr_state>
@@ -182,6 +244,14 @@ If the kernel has been tainted by overriding a firmware table or by loading a pr
  </red-def:fwupdsecattr_state>
  <red-def:fwupdsecattr_state id="oval:org.fwupd.hsi.Kernel.Tainted:ste:1" version="1">
   <red-def:security-attr datatype="string" operation="equals">tainted</red-def:security-attr>
+ </red-def:fwupdsecattr_state>
+ <!-- status is returned value which is in key:value format ex: security-attr:non-enabled -->
+ <red-def:fwupdsecattr_state id="oval:org.fwupd.hsi.Spi.Bioswe:ste:1" version="1">
+  <red-def:security-attr datatype="string" operation="equals">not-enabled</red-def:security-attr>
+ </red-def:fwupdsecattr_state>
+ <!-- end status -->
+ <red-def:fwupdsecattr_state id="oval:org.fwupd.hsi.IntelSmap:ste:1" version="1">
+  <red-def:security-attr datatype="string" operation="equals">not-enabled</red-def:security-attr>
  </red-def:fwupdsecattr_state>
 </states>
 </oval_definitions>
