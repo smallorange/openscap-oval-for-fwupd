@@ -240,7 +240,7 @@ programs.
   <red-def:security-attr datatype="string" operation="pattern match">not-found</red-def:security-attr>
  </red-def:fwupdsecattr_state>
  <red-def:fwupdsecattr_state id="oval:org.fwupd.hsi.Iommu:ste:1" version="1">
-  <red-def:security-attr datatype="string" operation="pattern match">not-found</red-def:security-attr>
+  <red-def:security-attr datatype="string" operation="pattern match">not-found|not-enabled</red-def:security-attr>
  </red-def:fwupdsecattr_state>
  <red-def:fwupdsecattr_state id="oval:org.fwupd.hsi.Kernel.Tainted:ste:1" version="1">
   <red-def:security-attr datatype="string" operation="equals">tainted</red-def:security-attr>
@@ -251,7 +251,7 @@ programs.
  </red-def:fwupdsecattr_state>
  <!-- end status -->
  <red-def:fwupdsecattr_state id="oval:org.fwupd.hsi.IntelSmap:ste:1" version="1">
-  <red-def:security-attr datatype="string" operation="equals">not-enabled</red-def:security-attr>
+  <red-def:security-attr datatype="string" operation="pattern match">not-enabled|not-valid</red-def:security-attr>
  </red-def:fwupdsecattr_state>
 </states>
 </oval_definitions>
